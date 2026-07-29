@@ -12,7 +12,7 @@ export default function ProductCard({ id, title, price, brand, rating, category,
       </div>
 
       <div className="p-4">
-        <p className="text-xs uppercase tracking-wide text-gray-400 font-medium">{brand}</p>
+        <p className="text-xs uppercase tracking-wide text-gray-400 font-medium">{brand || 'No Brand'}</p>
         <h3 className="text-lg font-semibold text-gray-900 mt-1 truncate">{title}</h3>
         <div className="flex items-center mt-2">
           <span className="text-yellow-400 text-sm">★</span>
