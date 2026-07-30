@@ -1,9 +1,9 @@
-import ProductGrid from "@/features/products/components/ProductGrid";
+import ShopPage from "@/features/products/components/ShopPage";
 
 export default function Shop() {
     return (
         <div className="min-h-screen">
-            <ProductGrid />
+            <ShopPage />
         </div>
     );
 }

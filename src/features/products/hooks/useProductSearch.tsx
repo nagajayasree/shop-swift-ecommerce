@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Product } from "../types";
 
-export function useProductSearch(searchValue: string) {
-    const [search, setSearch] = useState(searchValue);
+export function useProductSearch() {
+    const [search, setSearch] = useState('');
+    const [category, setCategory] = useState<string | null>(null);
+
     const [results, setResults] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const handleSearch = async () => {
-        if (!search.trim()) return;
-
+    const fetchProducts = useCallback(async () => {
         setLoading(true);
         setError("");
 
+        const url = search.trim()
+            ? `https://dummyjson.com/products/search?q=${encodeURIComponent(search)}`
+            : category
+              ? `https://dummyjson.com/products/category/${category}`
+              : `https://dummyjson.com/products`;
+
         try {
-            const res = await fetch(
-                `https://dummyjson.com/products/search?q=${search}`,
-            );
+            const res = await fetch(url);
             const data = await res.json();
             setResults(data.products);
         } catch (err) {
@@ -24,7 +28,16 @@ export function useProductSearch(searchValue: string) {
         } finally {
             setLoading(false);
         }
-    };
+    }, [search, category]);
 
-    return { search, setSearch, results, loading, error, handleSearch };
+    return {
+        search,
+        setSearch,
+        category,
+        setCategory,
+        results,
+        loading,
+        error,
+        fetchProducts,
+    };
 }
