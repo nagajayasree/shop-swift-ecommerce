@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import { Product } from "../types";
 import { useProductSearch } from "../hooks/useProductSearch";
 import { useProductFilter } from "../hooks/useProductFilter";
+import Link from "next/link";
 
 interface ProductGridProps {
     initialProducts: Product[];
@@ -161,16 +162,18 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 items-start">
                 {filteredProducts.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
-                        price={product.price}
-                        brand={product.brand}
-                        category={product.category}
-                        rating={product.rating}
-                        thumbnail={product.thumbnail}
-                    />
+                    <Link key={product.id} href={`/products/${product.id}`}>
+                        <ProductCard
+                            key={product.id}
+                            id={product.id}
+                            title={product.title}
+                            price={product.price}
+                            brand={product.brand}
+                            category={product.category}
+                            rating={product.rating}
+                            thumbnail={product.thumbnail}
+                        />
+                    </Link>
                 ))}
             </div>
         </div>
