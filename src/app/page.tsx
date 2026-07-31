@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import ShopPage from "@/features/products/components/ShopPage";
-import Loading from "./(shop)/loading";
+import ShopPage from "./(shop)/products/page";
+import Loading from "./(shop)/products/loading";
 
 export default function Home() {
     return (
