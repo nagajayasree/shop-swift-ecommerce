@@ -31,22 +31,21 @@ export default async function ProductDetails({
                         {product.brand}
                     </span>
 
-                    <h1 className="text-3xl font-semibold text-neutral-900 leading-tight mt-2">
+                    <h1 className="text-3xl text-neutral-900 dark:text-white font-semibold text-neutral-900 leading-tight mt-2">
                         {product.title}
                     </h1>
 
                     <div className="flex items-center gap-2 mt-3">
                         <div className="flex text-amber-500 text-sm">
                             {"★".repeat(Math.round(product.rating))}
-                            {"☆".repeat(5 - Math.round(product.rating))}
+                            {"☆".repeat(5 - Math.floor(product.rating))}
                         </div>
                         <span className="text-sm text-neutral-500">
-                            {product.rating.toFixed(1)}.
-                            {product.reviews?.length ?? 0} reviews
+                            {product.rating.toFixed(2)} reviews
                         </span>
                     </div>
 
-                    <p className="text-2xl font-semibold text-neutral-900 mt-6">
+                    <p className="text-2xl text-neutral-900 dark:text-white font-semibold text-neutral-900 mt-6">
                         ${product.price}
                     </p>
 
@@ -54,14 +53,15 @@ export default async function ProductDetails({
                         {product.description}
                     </p>
 
-                    <button className="mt-8 w-full md:w-fit px-8 py-3 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-neutral-700 transition-colors">
+                    <button className="border mt-8 w-full md:w-fit px-8 py-3 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-700 transition-colors">
                         Add to cart
                     </button>
                 </div>
             </div>
 
+            {/* Reviews section — now correctly outside the product grid */}
             <div className="mt-20 border-t border-neutral-200 pt-10">
-                <h2 className="text-xl font-semibold text-neutral-900 mb-6">
+                <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-6">
                     Reviews ({product.reviews?.length ?? 0})
                 </h2>
 
@@ -73,7 +73,7 @@ export default async function ProductDetails({
                                 className="border border-neutral-200 rounded-xl p-5 hover:border-neutral-300 hover:shadow-sm transition-all"
                             >
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="font-medium text-neutral-900 text-sm">
+                                    <span className="font-medium text-neutral-900 dark:text-white text-sm">
                                         {review.reviewerName}
                                     </span>
                                     <div className="flex text-amber-500 text-xs">

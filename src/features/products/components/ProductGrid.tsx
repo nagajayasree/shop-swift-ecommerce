@@ -42,36 +42,43 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
     const priceOptions = [10, 25, 50, 75, 100, 150, 200, 300, 500];
 
     return (
-        <div className="p-6">
+        <div className="p-6 dark:bg-neutral-900/100">
             <div className="flex gap-2 mb-6">
                 <input
                     value={search}
                     placeholder="Search for a product"
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && fetchProducts()}
-                    className="border text-black border-gray-300 rounded-lg px-3 py-2 flex-1"
+                    className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                 />
                 <button
                     onClick={fetchProducts}
-                    className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
+                    className="border text-neutral-900 hover:text-white dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white px-4 py-2 rounded-lg hover:bg-gray-700"
                 >
                     Search
                 </button>
             </div>
 
+            {/* Filters */}
             <div className="flex gap-2 mb-6">
                 <span className="flex flex-col text-xs">
-                    <label className="text-black">Category:</label>
+                    <label className="text-neutral-900 dark:text-white">
+                        Category:
+                    </label>
                     <select
                         value={filters.category ?? ""}
                         onChange={(e) =>
                             updateFilter("category", e.target.value || null)
                         }
-                        className="border text-black border-gray-300 rounded-lg px-3 py-2 flex-1"
+                        className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
                         <option value="">All Categories</option>
                         {categories.map((cat, index) => (
-                            <option key={index} value={cat}>
+                            <option
+                                key={index}
+                                value={cat}
+                                className="text-neutral-900 dark:text-white"
+                            >
                                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
                             </option>
                         ))}
@@ -79,17 +86,23 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 </span>
 
                 <span className="flex flex-col text-xs">
-                    <label className="text-black">Brand:</label>
+                    <label className="text-neutral-900 dark:text-white">
+                        Brand:
+                    </label>
                     <select
                         value={filters.brand ?? ""}
                         onChange={(e) =>
                             updateFilter("brand", e.target.value || null)
                         }
-                        className="border text-black border-gray-300 rounded-lg px-3 py-2 flex-1"
+                        className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
                         <option value="">All Brands</option>
                         {brands.map((brand, index) => (
-                            <option key={index} value={brand}>
+                            <option
+                                key={index}
+                                value={brand}
+                                className="text-neutral-900 dark:text-white"
+                            >
                                 {brand}
                             </option>
                         ))}
@@ -97,7 +110,9 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 </span>
 
                 <span className="flex flex-col text-xs">
-                    <label className="text-black">Rating:</label>
+                    <label className="text-neutral-900 dark:text-white">
+                        Rating:
+                    </label>
                     <select
                         value={filters.minRating ?? ""}
                         onChange={(e) =>
@@ -106,11 +121,15 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                                 e.target.value ? Number(e.target.value) : null,
                             )
                         }
-                        className="border text-black border-gray-300 rounded-lg px-3 py-2 flex-1"
+                        className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
                         <option value="">Any Rating</option>
                         {ratingOptions.map((r) => (
-                            <option key={r} value={r}>
+                            <option
+                                key={r}
+                                value={r}
+                                className="text-neutral-900 dark:text-white"
+                            >
                                 {r} {r === 1 ? "Star" : "Stars"}
                             </option>
                         ))}
@@ -118,7 +137,9 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 </span>
 
                 <span className="flex flex-col text-xs">
-                    <label className="text-black">Price:</label>
+                    <label className="text-neutral-900 dark:text-white">
+                        Price:
+                    </label>
                     <select
                         value={filters.maxPrice ?? ""}
                         onChange={(e) =>
@@ -127,11 +148,15 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                                 e.target.value ? Number(e.target.value) : null,
                             )
                         }
-                        className="border text-black border-gray-300 rounded-lg px-3 py-2 flex-1"
+                        className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
                         <option value="">Any Price</option>
                         {priceOptions.map((p) => (
-                            <option key={p} value={p}>
+                            <option
+                                key={p}
+                                value={p}
+                                className="text-neutral-900 dark:text-white"
+                            >
                                 Under ${p}
                             </option>
                         ))}
@@ -139,20 +164,22 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 </span>
 
                 <span className="flex flex-col text-xs">
-                    <label className="text-black invisible">Reset</label>
+                    <label className="text-neutral-900 dark:text-white invisible">
+                        Reset
+                    </label>
                     <button
                         onClick={() => {
                             resetFilters();
                             setSearch("");
                         }}
-                        className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
+                        className="border text-neutral-900 hover:text-white dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white px-4 py-2 rounded-lg hover:bg-gray-700"
                     >
                         Reset
                     </button>
                 </span>
             </div>
 
-            <div className="flex items-center justify-center">
+            <div className="bg-white/80 dark:bg-neutral-900/100 flex items-center justify-center">
                 {searching && <p className="text-gray-500">Searching...</p>}
                 {searchError && <p className="text-red-500">{searchError}</p>}
                 {filteredProducts.length === 0 && !searching && (
@@ -160,7 +187,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                 )}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 items-start">
+            <div className="bg-white/80 dark:bg-neutral-900/100 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 items-start">
                 {filteredProducts.map((product) => (
                     <Link key={product.id} href={`/products/${product.id}`}>
                         <ProductCard
