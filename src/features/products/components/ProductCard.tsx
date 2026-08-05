@@ -1,4 +1,5 @@
 import { ProductProps } from "../types";
+import { useTranslations } from "next-intl";
 
 export default function ProductCard({
     id,
@@ -9,15 +10,7 @@ export default function ProductCard({
     category,
     thumbnail,
 }: ProductProps) {
-  
-    const getStarCounts = (rating: number) => {
-        const rounded = Math.round(rating * 2) / 2;
-        const fullStars = Math.floor(rounded);
-        const hasHalfStar = rounded % 1 !== 0 ? 1 : 0;
-        const emptyStars = 5 - fullStars - hasHalfStar;
-
-        return { fullStars, hasHalfStar, emptyStars };
-    };
+    const t = useTranslations();
 
     return (
         <div className="w-full self-start rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-white border border-gray-100">
@@ -52,7 +45,7 @@ export default function ProductCard({
                         </span>
                     </div>
                     <button className="bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
-                        Add to Cart
+                        {t("ProductCard.addToCart")}
                     </button>
                 </div>
             </div>

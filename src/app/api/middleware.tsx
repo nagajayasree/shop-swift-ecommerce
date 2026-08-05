@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PROTECTED_ROUTES = ["/shop", "/account", "/admin"];
+const PROTECTED_ROUTES = ["/", "/account", "/admin"];
 const ADMIN_ROUTES = ["/admin"];
-const AUTH_ROUTES = ["/login", "/register"]; // redirect away if already logged in
+const AUTH_ROUTES = ["/login", "/signup"]; // redirect away if already logged in
 
 export function middleware(request: NextRequest) {
     const sessionCookie = request.cookies.get("session")?.value;
@@ -11,6 +11,7 @@ export function middleware(request: NextRequest) {
     const isProtected = PROTECTED_ROUTES.some((route) =>
         pathname.startsWith(route),
     );
+    
     const isAuthRoute = AUTH_ROUTES.some((route) => pathname.startsWith(route));
 
     // No session cookie, trying to hit a protected route → redirect to login

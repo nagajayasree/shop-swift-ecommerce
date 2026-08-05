@@ -1,38 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, SubmitEvent } from "react";
+
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/features/context/authContext";
+import { useTranslations } from "next-intl";
 
-export default function Login() {
+export default function SignUp() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const [error, setError] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { signIn, user } = useAuth();
-
-    console.log("user:", user);
+    const { signUp } = useAuth();
 
     const router = useRouter();
 
-    const onHandleSubmit = async () => {
+    const t = useTranslations();
+
+    const onHandleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setError("");
-        setIsSubmitting(true);
 
         try {
-            await signIn(email, password);
-            router.push("/");
+            const result = await signUp(
+                { displayName: name, email: email, password: password },
+                // idToken,
+            );
+
             router.refresh();
+            setName("");
+            setEmail("");
+            setPassword("");
+            setShowPassword(false);
         } catch (error: unknown) {
             console.error(error);
             setError(error instanceof Error ? error.message : String(error));
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
@@ -41,20 +48,28 @@ export default function Login() {
             <div className="w-full max-w-xl dark:bg-neutral-900/100 rounded-2xl border dark:border-gray-600 p-8 shadow-2xl">
                 <div className="mb-6">
                     <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                        Welcome back
+                        {t("SignUpPage.title")}{" "}
                     </h3>
                 </div>
 
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        onHandleSubmit();
-                    }}
-                    className="space-y-4"
-                >
+                <form onSubmit={onHandleSubmit} className="space-y-4">
                     <label className="block">
                         <span className="mb-1 block text-sm font-medium text-neutral-900 dark:text-white">
-                            Email
+                            {t("SignUpPage.fullName")}
+                        </span>
+                        <input
+                            type="text"
+                            name="fullName"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Jane Doe"
+                            className="w-full rounded-xl border dark:border-gray-600 px-4 py-3 text-neutral-900 dark:text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
+                        />
+                    </label>
+
+                    <label className="block">
+                        <span className="mb-1 block text-sm font-medium text-neutral-900 dark:text-white">
+                            {t("SignUpPage.email")}
                         </span>
                         <input
                             type="email"
@@ -62,14 +77,13 @@ export default function Login() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="jane@example.com"
-                            required
                             className="w-full rounded-xl border dark:border-gray-600 px-4 py-3 text-neutral-900 dark:text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
                         />
                     </label>
 
                     <label className="block">
                         <span className="mb-1 block text-sm font-medium text-neutral-900 dark:text-white">
-                            Password
+                            {t("SignUpPage.password")}
                         </span>
 
                         <div className="relative">
@@ -78,8 +92,9 @@ export default function Login() {
                                 name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
-                                required
+                                placeholder={t(
+                                    "SignUpPage.passwordPlaceholder",
+                                )}
                                 className="w-full rounded-xl border dark:border-gray-600 px-4 py-3 text-neutral-900 dark:text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
                             />
 
@@ -104,32 +119,22 @@ export default function Login() {
                         <span className="text-red-400 text-sm">{error}</span>
                     </label>
 
-                    <div className="flex justify-end text-sm">
-                        <Link
-                            href={"/forgot-password"}
-                            className="text-sky-400 hover:text-sky-300"
-                        >
-                            Forgot password?
-                        </Link>
-                    </div>
-
                     <button
                         type="submit"
-                        disabled={isSubmitting}
-                        className="w-full rounded-xl bg-sky-600 px-4 py-3 font-medium text-white transition hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 disabled:cursor-not-allowed disabled:opacity-60"
+                        className="w-full rounded-xl bg-sky-600 px-4 py-3 font-medium text-white transition hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40"
                     >
-                        {isSubmitting ? "Logging in..." : "Log in"}
+                        {t("SignUpPage.createAccount")}
                     </button>
 
                     <div className="flex items-center justify-center gap-2 text-sm">
                         <span className="text-slate-400">
-                            Don&apos;t have an account?
+                            {t("SignUpPage.alreadyAccount")}
                         </span>
                         <Link
-                            href={"/signup"}
+                            href={"/login"}
                             className="text-sky-400 hover:text-sky-300"
                         >
-                            Sign up
+                            {t("SignUpPage.login")}
                         </Link>
                     </div>
                 </form>
