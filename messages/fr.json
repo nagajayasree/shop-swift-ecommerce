@@ -1,0 +1,54 @@
+{
+    "ProductsPage": {
+        "searchPlaceholder": "Rechercher un produit",
+        "search": "Recherche",
+        "category": "Catégorie",
+        "allCategories": "Toutes les catégories",
+        "brand": "Marque",
+        "allBrands": "Toutes les marques",
+        "price": "Prix",
+        "anyPrice": "Tous les prix",
+        "rating": "Note",
+        "anyRating": "Toutes les notes",
+        "reset": "Réinitialiser",
+        "productsNotFound": "Aucun produit trouvé",
+        "star": "étoile",
+        "under": "Moins de",
+        "searching": "Recherche en cours..."
+    },
+
+    "ProductCard": {
+        "addToCart": "Ajouter au panier"
+    },
+
+    "CartPage": {
+        "title": "Votre panier"
+    },
+
+    "LoginPage": {
+        "title": "Bon retour !",
+        "email": "Courriel",
+        "password": "Mot de passe",
+        "enterPassword": "Entrez votre mot de passe",
+        "forgotPassword": "Mot de passe oublié ?",
+        "login": "Connexion",
+        "noAccount": "Pas de compte ?",
+        "signUp": "Inscription"
+    },
+
+    "SignUpPage": {
+        "title": "Inscription",
+        "fullName": "Nom complet",
+        "email": "Courriel",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Au moins 8 caractères",
+        "createAccount": "Créer un compte",
+        "alreadyAccount": "Déjà un compte ?",
+        "login": "Connexion"
+    },
+
+    "ProductDetails": {
+        "addToCart": "Ajouter au panier",
+        "reviews":"Commentaires"
+    }
+}

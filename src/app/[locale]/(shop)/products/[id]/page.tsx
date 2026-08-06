@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getProductById } from "@/features/products/lib/products";
 import { Review } from "@/features/products/types";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProductDetails({
     params,
@@ -13,6 +14,8 @@ export default async function ProductDetails({
     if (!product) {
         notFound();
     }
+
+    const t = await getTranslations();
 
     return (
         <div className="max-w-5xl mx-auto px-6 py-12">
@@ -41,7 +44,8 @@ export default async function ProductDetails({
                             {"☆".repeat(5 - Math.floor(product.rating))}
                         </div>
                         <span className="text-sm text-neutral-500">
-                            {product.rating.toFixed(2)} reviews
+                            {product.rating.toFixed(2)}{" "}
+                            {t("ProductDetails.reviews")}
                         </span>
                     </div>
 
@@ -54,7 +58,7 @@ export default async function ProductDetails({
                     </p>
 
                     <button className="border mt-8 w-full md:w-fit px-8 py-3 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-700 transition-colors">
-                        Add to cart
+                        {t("ProductDetails.addToCart")}
                     </button>
                 </div>
             </div>
@@ -62,7 +66,8 @@ export default async function ProductDetails({
             {/* Reviews section — now correctly outside the product grid */}
             <div className="mt-20 border-t border-neutral-200 pt-10">
                 <h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-6">
-                    Reviews ({product.reviews?.length ?? 0})
+                    {t("ProductDetails.reviews")} (
+                    {product.reviews?.length ?? 0})
                 </h2>
 
                 {product.reviews && product.reviews.length > 0 ? (

@@ -5,7 +5,8 @@ import { ShoppingCart, Sun, Moon, LogIn, LogOut } from "lucide-react";
 import { useTheme } from "@/features/context/themeContext";
 import { useAuth } from "@/features/context/authContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";;
+import { useEffect, useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface NavbarProps {
     // isUserLoggedIn: boolean;
@@ -79,6 +80,8 @@ export default function Navbar() {
                             </span>
                         )} */}
                     </Link>
+
+                    <LanguageSwitcher />
 
                     {/* Login / Logout */}
                     {isLoggedIn ? (

@@ -1,0 +1,54 @@
+{
+    "ProductsPage": {
+        "searchPlaceholder": "Search for a product",
+        "search": "Search",
+        "category": "Category",
+        "allCategories": "All categories",
+        "brand": "Brand",
+        "allBrands": "All brands",
+        "price": "Price",
+        "anyPrice": "Any price",
+        "rating": "Rating",
+        "anyRating": "Any rating",
+        "reset": "Reset",
+        "productsNotFound": "No products found",
+        "star": "star",
+        "under": "Under",
+        "searching": "Searching..."
+    },
+
+    "ProductCard": {
+        "addToCart": "Add to cart"
+    },
+
+    "CartPage": {
+        "title": "Your Cart"
+    },
+
+    "LoginPage": {
+        "title": "Welcome back!",
+        "email": "Email address",
+        "password": "Password",
+        "enterPassword": "Enter your password",
+        "forgotPassword": "Forgot password?",
+        "login": "Log In",
+        "noAccount": "Don't have an account?",
+        "signUp": "Sign Up"
+    },
+
+    "SignUpPage": {
+        "title": "Sign Up",
+        "fullName": "Full name",
+        "email": "Email address",
+        "password": "Password",
+        "passwordPlaceholder": "At least 8 characters",
+        "createAccount": "Create an account",
+        "alreadyAccount": "Already have an account?",
+        "login": "Log In"
+    },
+
+    "ProductDetails": {
+        "addToCart": "Add to cart",
+        "reviews":"Reviews"
+    }
+}

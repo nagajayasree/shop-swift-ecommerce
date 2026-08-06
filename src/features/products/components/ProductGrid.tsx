@@ -6,6 +6,7 @@ import { Product } from "../types";
 import { useProductSearch } from "../hooks/useProductSearch";
 import { useProductFilter } from "../hooks/useProductFilter";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface ProductGridProps {
     initialProducts: Product[];
@@ -41,12 +42,14 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
     const priceOptions = [10, 25, 50, 75, 100, 150, 200, 300, 500];
 
+    const t = useTranslations();
+
     return (
         <div className="p-6 dark:bg-neutral-900/100">
             <div className="flex gap-2 mb-6">
                 <input
                     value={search}
-                    placeholder="Search for a product"
+                    placeholder={t("ProductsPage.searchPlaceholder")}
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && fetchProducts()}
                     className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
@@ -55,7 +58,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                     onClick={fetchProducts}
                     className="border text-neutral-900 hover:text-white dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white px-4 py-2 rounded-lg hover:bg-gray-700"
                 >
-                    Search
+                    {t("ProductsPage.search")}
                 </button>
             </div>
 
@@ -63,7 +66,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
             <div className="flex gap-2 mb-6">
                 <span className="flex flex-col text-xs">
                     <label className="text-neutral-900 dark:text-white">
-                        Category:
+                        {t("ProductsPage.category")}:
                     </label>
                     <select
                         value={filters.category ?? ""}
@@ -72,7 +75,9 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                         }
                         className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
-                        <option value="">All Categories</option>
+                        <option value="">
+                            {t("ProductsPage.allCategories")}
+                        </option>
                         {categories.map((cat, index) => (
                             <option
                                 key={index}
@@ -87,7 +92,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
                 <span className="flex flex-col text-xs">
                     <label className="text-neutral-900 dark:text-white">
-                        Brand:
+                        {t("ProductsPage.brand")}:
                     </label>
                     <select
                         value={filters.brand ?? ""}
@@ -96,7 +101,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                         }
                         className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
-                        <option value="">All Brands</option>
+                        <option value="">{t("ProductsPage.allBrands")}</option>
                         {brands.map((brand, index) => (
                             <option
                                 key={index}
@@ -111,7 +116,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
                 <span className="flex flex-col text-xs">
                     <label className="text-neutral-900 dark:text-white">
-                        Rating:
+                        {t("ProductsPage.rating")}:
                     </label>
                     <select
                         value={filters.minRating ?? ""}
@@ -123,14 +128,14 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                         }
                         className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
-                        <option value="">Any Rating</option>
+                        <option value="">{t("ProductsPage.anyRating")}</option>
                         {ratingOptions.map((r) => (
                             <option
                                 key={r}
                                 value={r}
                                 className="text-neutral-900 dark:text-white"
                             >
-                                {r} {r === 1 ? "Star" : "Stars"}
+                                {r} {t("ProductsPage.star")}
                             </option>
                         ))}
                     </select>
@@ -138,7 +143,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
                 <span className="flex flex-col text-xs">
                     <label className="text-neutral-900 dark:text-white">
-                        Price:
+                        {t("ProductsPage.price")}:
                     </label>
                     <select
                         value={filters.maxPrice ?? ""}
@@ -150,14 +155,14 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                         }
                         className="border text-neutral-900 dark:text-white dark:border-gray-600 rounded-lg px-3 py-2 flex-1"
                     >
-                        <option value="">Any Price</option>
+                        <option value="">{t("ProductsPage.anyPrice")}</option>
                         {priceOptions.map((p) => (
                             <option
                                 key={p}
                                 value={p}
                                 className="text-neutral-900 dark:text-white"
                             >
-                                Under ${p}
+                                {t("ProductsPage.under")} ${p}
                             </option>
                         ))}
                     </select>
@@ -165,7 +170,7 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
                 <span className="flex flex-col text-xs">
                     <label className="text-neutral-900 dark:text-white invisible">
-                        Reset
+                        {t("ProductsPage.reset")}
                     </label>
                     <button
                         onClick={() => {
@@ -174,16 +179,22 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
                         }}
                         className="border text-neutral-900 hover:text-white dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white px-4 py-2 rounded-lg hover:bg-gray-700"
                     >
-                        Reset
+                        {t("ProductsPage.reset")}
                     </button>
                 </span>
             </div>
 
             <div className="bg-white/80 dark:bg-neutral-900/100 flex items-center justify-center">
-                {searching && <p className="text-gray-500">Searching...</p>}
+                {searching && (
+                    <p className="text-gray-500">
+                        {t("ProductsPage.searching")}
+                    </p>
+                )}
                 {searchError && <p className="text-red-500">{searchError}</p>}
                 {filteredProducts.length === 0 && !searching && (
-                    <p className="text-gray-500">No products found</p>
+                    <p className="text-gray-500">
+                        {t("ProductsPage.productsNotFound")}
+                    </p>
                 )}
             </div>
 
