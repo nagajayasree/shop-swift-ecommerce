@@ -7,19 +7,12 @@ import { useAuth } from "@/features/context/authContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
-
-interface NavbarProps {
-    // isUserLoggedIn: boolean;
-    // cartCount?: number;
-}
+import { useCart } from "@/features/context/cartContext";
 
 export default function Navbar() {
-    // {
-    // isUserLoggedIn,
-    // cartCount = 0,
-    // }: NavbarProps
     const { themeValue, toggleSwitch } = useTheme();
     const { isLoggedIn, signOut } = useAuth();
+    const { getCartCount } = useCart();
 
     const router = useRouter();
 
@@ -74,11 +67,11 @@ export default function Navbar() {
                     >
                         <ShoppingCart size={20} />
 
-                        {/* {cartCount > 0 && (
+                        {getCartCount() > 0 && (
                             <span className="absolute -top-2 -right-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-medium rounded-full w-4 h-4 flex items-center justify-center">
-                                {cartCount}
+                                {getCartCount()}
                             </span>
-                        )} */}
+                        )}
                     </Link>
 
                     <LanguageSwitcher />

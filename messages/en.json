@@ -22,7 +22,12 @@
     },
 
     "CartPage": {
-        "title": "Your Cart"
+        "title": "Your Cart",
+        "emptyMessage": "Your cart is empty!",
+        "clearCart": "Clear cart",
+        "remove": "Remove",
+        "subtotal": "Subtotal",
+        "checkout": "Checkout"
     },
 
     "LoginPage": {
@@ -49,6 +54,7 @@
 
     "ProductDetails": {
         "addToCart": "Add to cart",
-        "reviews":"Reviews"
+        "reviews": "Reviews",
+        "noReviews": "No reviews yet"
     }
 }
