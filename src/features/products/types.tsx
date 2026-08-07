@@ -30,3 +30,5 @@ export type ProductProps = {
     brand: string;
     rating: number;
 };
+
+export type CartProduct = Pick<Product, "id" | "title" | "price" | "thumbnail">;

@@ -4,6 +4,7 @@ import Navbar from "@/features/components/layout/Navbar";
 import ThemeProvider from "@/features/context/themeContext";
 import AuthProvider from "@/features/context/authContext";
 import { NextIntlClientProvider } from "next-intl";
+import CartProvider from "@/features/context/cartContext";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -52,10 +53,12 @@ export default function RootLayout({
                 <NextIntlClientProvider>
                     <ThemeProvider>
                         <AuthProvider>
-                            <Navbar />
-                            <main className="bg-white/80 dark:bg-neutral-900/100 flex-1">
-                                {children}
-                            </main>
+                            <CartProvider>
+                                <Navbar />
+                                <main className="bg-white/80 dark:bg-neutral-900/100 flex-1">
+                                    {children}
+                                </main>
+                            </CartProvider>
                         </AuthProvider>
                     </ThemeProvider>
                 </NextIntlClientProvider>

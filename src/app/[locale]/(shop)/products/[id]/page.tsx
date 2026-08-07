@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getProductById } from "@/features/products/lib/products";
 import { Review } from "@/features/products/types";
 import { getTranslations } from "next-intl/server";
+import AddToCartButton from "./AddToCartButton";
 
 export default async function ProductDetails({
     params,
@@ -16,6 +17,9 @@ export default async function ProductDetails({
     }
 
     const t = await getTranslations();
+
+    const filledStars = Math.floor(product.rating);
+    const emptyStars = 5 - filledStars;
 
     return (
         <div className="max-w-5xl mx-auto px-6 py-12">
@@ -40,8 +44,8 @@ export default async function ProductDetails({
 
                     <div className="flex items-center gap-2 mt-3">
                         <div className="flex text-amber-500 text-sm">
-                            {"★".repeat(Math.round(product.rating))}
-                            {"☆".repeat(5 - Math.floor(product.rating))}
+                            {"★".repeat(filledStars)}
+                            {"☆".repeat(emptyStars)}
                         </div>
                         <span className="text-sm text-neutral-500">
                             {product.rating.toFixed(2)}{" "}
@@ -57,9 +61,10 @@ export default async function ProductDetails({
                         {product.description}
                     </p>
 
-                    <button className="border mt-8 w-full md:w-fit px-8 py-3 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-700 transition-colors">
-                        {t("ProductDetails.addToCart")}
-                    </button>
+                    <AddToCartButton
+                        product={product}
+                        label={t("ProductDetails.addToCart")}
+                    />
                 </div>
             </div>
 
@@ -105,7 +110,9 @@ export default async function ProductDetails({
                         ))}
                     </div>
                 ) : (
-                    <p className="text-neutral-500 text-sm">No reviews yet.</p>
+                    <p className="text-neutral-500 text-sm">
+                        {t("ProductDetails.noReviews")}
+                    </p>
                 )}
             </div>
         </div>

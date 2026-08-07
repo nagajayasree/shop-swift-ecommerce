@@ -22,7 +22,12 @@
     },
 
     "CartPage": {
-        "title": "Votre panier"
+        "title": "Votre panier",
+        "emptyMessage": "Votre panier est vide !",
+        "clearCart": "Vider le panier",
+        "remove": "Supprimer",
+        "subtotal": "Sous-total ",
+        "checkout": "Paiement"
     },
 
     "LoginPage": {
@@ -49,6 +54,7 @@
 
     "ProductDetails": {
         "addToCart": "Ajouter au panier",
-        "reviews":"Commentaires"
+        "reviews": "Commentaires",
+        "noReviews": "Aucun commentaires pour le moment"
     }
 }

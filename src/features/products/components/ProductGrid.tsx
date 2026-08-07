@@ -200,18 +200,16 @@ export default function ProductGrid({ initialProducts }: ProductGridProps) {
 
             <div className="bg-white/80 dark:bg-neutral-900/100 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 items-start">
                 {filteredProducts.map((product) => (
-                    <Link key={product.id} href={`/products/${product.id}`}>
-                        <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            price={product.price}
-                            brand={product.brand}
-                            category={product.category}
-                            rating={product.rating}
-                            thumbnail={product.thumbnail}
-                        />
-                    </Link>
+                    <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        brand={product.brand}
+                        category={product.category}
+                        rating={product.rating}
+                        thumbnail={product.thumbnail}
+                    />
                 ))}
             </div>
         </div>
