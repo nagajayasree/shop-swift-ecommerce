@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
-import { Product } from "../types";
+import { Product } from "../../lib/types";
 
 export function useProductSearch() {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState("");
     const [category, setCategory] = useState<string | null>(null);
 
     const [results, setResults] = useState<Product[]>([]);

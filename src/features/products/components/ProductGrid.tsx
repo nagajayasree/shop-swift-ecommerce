@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-import { Product } from "../types";
+import { Product } from "../../lib/types";
 import { useProductSearch } from "../hooks/useProductSearch";
 import { useProductFilter } from "../hooks/useProductFilter";
 import Link from "next/link";

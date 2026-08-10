@@ -1,35 +1,4 @@
 {
-    "ProductsPage": {
-        "searchPlaceholder": "Rechercher un produit",
-        "search": "Recherche",
-        "category": "Catégorie",
-        "allCategories": "Toutes les catégories",
-        "brand": "Marque",
-        "allBrands": "Toutes les marques",
-        "price": "Prix",
-        "anyPrice": "Tous les prix",
-        "rating": "Note",
-        "anyRating": "Toutes les notes",
-        "reset": "Réinitialiser",
-        "productsNotFound": "Aucun produit trouvé",
-        "star": "étoile",
-        "under": "Moins de",
-        "searching": "Recherche en cours..."
-    },
-
-    "ProductCard": {
-        "addToCart": "Ajouter au panier"
-    },
-
-    "CartPage": {
-        "title": "Votre panier",
-        "emptyMessage": "Votre panier est vide !",
-        "clearCart": "Vider le panier",
-        "remove": "Supprimer",
-        "subtotal": "Sous-total ",
-        "checkout": "Paiement"
-    },
-
     "LoginPage": {
         "title": "Bon retour !",
         "email": "Courriel",
@@ -52,9 +21,71 @@
         "login": "Connexion"
     },
 
+    "Navbar": {
+        "hi": "Bonjour",
+        "myAccount": "Mon compte",
+        "myOrders": "Mes commandes",
+        "logout": "Se déconnecter"
+    },
+
+    "ProductCard": {
+        "addToCart": "Ajouter au panier"
+    },
+
+    "ProductsPage": {
+        "searchPlaceholder": "Rechercher un produit",
+        "search": "Recherche",
+        "category": "Catégorie",
+        "allCategories": "Toutes les catégories",
+        "brand": "Marque",
+        "allBrands": "Toutes les marques",
+        "price": "Prix",
+        "anyPrice": "Tous les prix",
+        "rating": "Note",
+        "anyRating": "Toutes les notes",
+        "reset": "Réinitialiser",
+        "productsNotFound": "Aucun produit trouvé",
+        "star": "étoile",
+        "under": "Moins de",
+        "searching": "Recherche en cours..."
+    },
+
     "ProductDetails": {
         "addToCart": "Ajouter au panier",
         "reviews": "Commentaires",
         "noReviews": "Aucun commentaires pour le moment"
+    },
+
+    "CartPage": {
+        "title": "Votre panier",
+        "emptyMessage": "Votre panier est vide !",
+        "clearCart": "Vider le panier",
+        "remove": "Supprimer",
+        "subtotal": "Sous-total",
+        "checkout": "Paiement",
+        "loginToCheckout": "Connectez-vous pour passer la commande"
+    },
+
+    "AccountPage": {
+        "title": "Votre compte",
+        "info": "Ceci est la page de votre compte. Vous pouvez gérer les paramètres de votre compte ici."
+    },
+
+    "OrdersPage": {
+        "title": "Mes commandes",
+        "noOrders": "Pas de commandes",
+        "orderPlaced": "Confirmée"
+    },
+
+    "SuccessPage": {
+        "title": "Commande confirmée",
+        "desc": "Merci pour votre achat — une confirmation a été enregistrée.",
+        "orderTotal": "Total de la commande",
+        "email": "Courriel",
+        "viewMyOrders": "Voir mes commandes",
+        "continueShopping": "Continuer mes achats",
+        "paymentNotConfirmed": "Paiement non confirmé",
+        "cantConfirmPayment": "Nous n’avons pas pu confirmer ce paiement. Si vous avez été débité(e), contactez l’assistance en indiquant la référence de votre commande.",
+        "backToCart": "Retour au panier"
     }
 }

@@ -1,5 +1,5 @@
-import ProductGrid from '@/features/products/components/ProductGrid';
-import { Product } from '@/features/products/types';
+import ProductGrid from "@/features/products/components/ProductGrid";
+import { Product } from "@/features/lib/types";
 
 async function getProducts(): Promise<Product[]> {
     const res = await fetch("https://dummyjson.com/products?limit=0");

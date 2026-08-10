@@ -1,35 +1,4 @@
 {
-    "ProductsPage": {
-        "searchPlaceholder": "Search for a product",
-        "search": "Search",
-        "category": "Category",
-        "allCategories": "All categories",
-        "brand": "Brand",
-        "allBrands": "All brands",
-        "price": "Price",
-        "anyPrice": "Any price",
-        "rating": "Rating",
-        "anyRating": "Any rating",
-        "reset": "Reset",
-        "productsNotFound": "No products found",
-        "star": "star",
-        "under": "Under",
-        "searching": "Searching..."
-    },
-
-    "ProductCard": {
-        "addToCart": "Add to cart"
-    },
-
-    "CartPage": {
-        "title": "Your Cart",
-        "emptyMessage": "Your cart is empty!",
-        "clearCart": "Clear cart",
-        "remove": "Remove",
-        "subtotal": "Subtotal",
-        "checkout": "Checkout"
-    },
-
     "LoginPage": {
         "title": "Welcome back!",
         "email": "Email address",
@@ -52,9 +21,71 @@
         "login": "Log In"
     },
 
+    "Navbar": {
+        "hi": "Hi",
+        "myAccount": "My Account",
+        "myOrders": "My Orders",
+        "logout": "Logout"
+    },
+
+    "ProductCard": {
+        "addToCart": "Add to cart"
+    },
+
+    "ProductsPage": {
+        "searchPlaceholder": "Search for a product",
+        "search": "Search",
+        "category": "Category",
+        "allCategories": "All categories",
+        "brand": "Brand",
+        "allBrands": "All brands",
+        "price": "Price",
+        "anyPrice": "Any price",
+        "rating": "Rating",
+        "anyRating": "Any rating",
+        "reset": "Reset",
+        "productsNotFound": "No products found",
+        "star": "star",
+        "under": "Under",
+        "searching": "Searching..."
+    },
+
     "ProductDetails": {
         "addToCart": "Add to cart",
         "reviews": "Reviews",
         "noReviews": "No reviews yet"
+    },
+
+    "CartPage": {
+        "title": "Your Cart",
+        "emptyMessage": "Your cart is empty!",
+        "clearCart": "Clear cart",
+        "remove": "Remove",
+        "subtotal": "Subtotal",
+        "checkout": "Checkout",
+        "loginToCheckout": "Log in to checkout"
+    },
+
+    "AccountPage": {
+        "title": "Your Account",
+        "info": "This is the account page. You can manage your account settings here."
+    },
+
+    "OrdersPage": {
+        "title": "My Orders",
+        "noOrders": "You haven't placed any orders yet!",
+        "orderPlaced": "Placed"
+    },
+
+    "SuccessPage": {
+        "title": "Order confirmed",
+        "desc": "Thanks for your purchase — a confirmation has been recorded.",
+        "orderTotal": "Order total",
+        "email": "Email",
+        "viewMyOrders": "View my orders",
+        "continueShopping": "Continue shopping",
+        "paymentNotConfirmed": "Payment not confirmed",
+        "cantConfirmPayment": "We couldn't confirm this payment. If you were charged, contact support with your order reference.",
+        "backToCart": "Back to cart"
     }
 }
