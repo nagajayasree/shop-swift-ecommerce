@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { getProductById } from "@/features/products/lib/products";
-import { Review } from "@/features/products/types";
+import { getProductById } from "@/features/lib/getProduct";
+import { Review } from "@/features/lib/types";
 import { getTranslations } from "next-intl/server";
 import AddToCartButton from "./AddToCartButton";
 

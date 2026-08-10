@@ -1,10 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { useCart } from "@/features/context/cartContext";
+import { useAuth } from "@/features/context/authContext";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export default function Cart() {
+    const [isCheckingOut, setIsCheckingOut] = useState(false);
+    const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
     const t = useTranslations();
+
+    const router = useRouter();
+    const { isLoggedIn, loading } = useAuth();
 
     const { cartItems, removeFromCart, updateItemQuantity, clearCart } =
         useCart();
@@ -13,6 +22,46 @@ export default function Cart() {
         (sum, item) => sum + item.price * (item?.quantity || 0),
         0,
     );
+
+    async function handleCheckout() {
+        if (!isLoggedIn) {
+            router.push("/login?redirect=/cart");
+            return;
+        }
+
+        setIsCheckingOut(true);
+        setCheckoutError(null);
+
+        try {
+            const res = await fetch("/api/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    items: cartItems.map((item) => ({
+                        productId: item.id,
+                        quantity: item.quantity,
+                    })),
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error("Checkout failed");
+            }
+
+            const { url } = await res.json();
+
+            if (!url) {
+                throw new Error("No checkout URL returned");
+            }
+
+            window.location.href = url;
+        } catch (err) {
+            setCheckoutError(
+                "Something went wrong starting checkout. Please try again.",
+            );
+            setIsCheckingOut(false);
+        }
+    }
 
     return (
         <div className="min-h-screen p-6 dark:bg-neutral-900 bg-neutral-50">
@@ -109,15 +158,29 @@ export default function Cart() {
 
                         <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-700 flex items-center justify-between">
                             <span className="text-neutral-600 dark:text-neutral-300 text-base">
-                                Subtotal
+                                {t("CartPage.subtotal")}
                             </span>
                             <span className="text-xl font-bold text-neutral-900 dark:text-white">
                                 ${subtotal.toFixed(2)}
                             </span>
                         </div>
 
-                        <button className="mt-4 w-full py-3 rounded-lg bg-gray-700 hover:bg-gray-900 text-white font-semibold transition-colors">
-                            Checkout
+                        {checkoutError && (
+                            <p className="mt-2 text-sm text-red-500">
+                                {checkoutError}
+                            </p>
+                        )}
+
+                        <button
+                            onClick={handleCheckout}
+                            disabled={isCheckingOut}
+                            className="mt-4 w-full py-3 rounded-lg bg-gray-700 hover:bg-gray-900 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {isCheckingOut
+                                ? t("CartPage.processing")
+                                : !isLoggedIn
+                                  ? t("CartPage.loginToCheckout")
+                                  : t("CartPage.checkout")}
                         </button>
                     </>
                 )}

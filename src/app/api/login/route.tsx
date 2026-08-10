@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuth } from "@/features/authentication/firebaseAdmin";
 
-const SESSION_EXPIRY_MS = 60 * 60 * 24 * 5 * 1000; // 5 days
-
 export async function POST(request: NextRequest) {
     const { idToken } = await request.json();
 
@@ -15,13 +13,13 @@ export async function POST(request: NextRequest) {
         await adminAuth.verifyIdToken(idToken);
 
         const sessionCookie = await adminAuth.createSessionCookie(idToken, {
-            expiresIn: SESSION_EXPIRY_MS,
+            expiresIn: 60 * 60 * 24 * 5 * 1000,
         });
 
-        const response = NextResponse.json({ status: "success" });
+        const response = NextResponse.json({ status: true });
 
         response.cookies.set("session", sessionCookie, {
-            maxAge: SESSION_EXPIRY_MS / 1000, // seconds, not ms
+            maxAge: 60 * 60 * 24 * 5,
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             path: "/",

@@ -107,14 +107,14 @@ export default function Login() {
                         <span className="text-red-400 text-sm">{error}</span>
                     </label>
 
-                    <div className="flex justify-end text-sm">
+                    {/* <div className="flex justify-end text-sm">
                         <Link
                             href={"/forgot-password"}
                             className="text-sky-400 hover:text-sky-300"
                         >
                             {t("LoginPage.forgotPassword")}
                         </Link>
-                    </div>
+                    </div> */}
 
                     <button
                         type="submit"
