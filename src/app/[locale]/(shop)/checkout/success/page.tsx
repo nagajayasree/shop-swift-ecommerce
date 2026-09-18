@@ -1,7 +1,7 @@
 // app/checkout/success/page.tsx
 import ClearCartOnSuccess from "@/features/components/checkout/ClearOnSuccess";
 import { stripe } from "@/features/components/checkout/stripe";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -13,19 +13,18 @@ export default async function CheckoutSuccessPage({
     searchParams,
 }: SuccessPageProps) {
     const { session_id: sessionId } = await searchParams;
-
+    
     if (!sessionId) {
         redirect("/");
     }
-
+    
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ["line_items"],
     });
-
+    
     const isPaid = session.payment_status === "paid";
-
-    const t = useTranslations();
-
+    const t = await getTranslations();
+    
     return (
         <div className="min-h-screen dark:bg-neutral-900 bg-neutral-50">
             <div className="max-w-2xl mx-auto py-16 px-4 text-center">

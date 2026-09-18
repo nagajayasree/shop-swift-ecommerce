@@ -1,10 +1,10 @@
 import "server-only";
 
-import clientPromise from "./mongodb";
+import { getMongoClient } from "@/features/lib/mongodb";
 import { Order } from "@/features/lib/types";
 
 export async function getOrders(): Promise<Order[]> {
-    const client = await clientPromise;
+    const client = await getMongoClient();
     const db = client.db("swift-shop-database");
 
     const orders = await db
