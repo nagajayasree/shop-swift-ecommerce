@@ -1,17 +1,24 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
+    var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-const uri = process.env.MONGODB_URI;
-const options = {};
+let clientPromise: Promise<MongoClient> | undefined;
 
-if (!uri) {
-  throw new Error('Please add your Mongo URI to .env.local');
+export function getMongoClient(): Promise<MongoClient> {
+    if (clientPromise) return clientPromise;
+
+    const uri = process.env.MONGODB_URI;
+    if (!uri) throw new Error("MONGODB_URI is not set");
+
+    if (process.env.NODE_ENV === "development") {
+        // Reuse across hot reloads so dev doesn't open a new pool per edit.
+        global._mongoClientPromise ??= new MongoClient(uri).connect();
+        clientPromise = global._mongoClientPromise;
+    } else {
+        clientPromise = new MongoClient(uri).connect();
+    }
+
+    return clientPromise;
 }
-
-const client = new MongoClient(uri, options);
-const clientPromise: Promise<MongoClient> = client.connect();
-
-export default clientPromise;
