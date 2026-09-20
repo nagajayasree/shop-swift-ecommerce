@@ -1,3 +1,10 @@
+console.log(
+    "ENV CHECK:",
+    Object.keys(process.env)
+        .filter((k) => k.startsWith("NEXT_PUBLIC_"))
+        .join(", ") || "(none)",
+);
+
 import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
