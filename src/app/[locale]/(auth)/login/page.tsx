@@ -15,9 +15,7 @@ export default function Login() {
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { signIn, user } = useAuth();
-
-    console.log("user:", user);
+    const { signIn } = useAuth();
 
     const router = useRouter();
 

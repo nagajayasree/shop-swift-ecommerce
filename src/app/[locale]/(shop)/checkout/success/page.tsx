@@ -13,18 +13,18 @@ export default async function CheckoutSuccessPage({
     searchParams,
 }: SuccessPageProps) {
     const { session_id: sessionId } = await searchParams;
-    
+
     if (!sessionId) {
         redirect("/");
     }
-    
+
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
         expand: ["line_items"],
     });
-    
+
     const isPaid = session.payment_status === "paid";
     const t = await getTranslations();
-    
+
     return (
         <div className="min-h-screen dark:bg-neutral-900 bg-neutral-50">
             <div className="max-w-2xl mx-auto py-16 px-4 text-center">
@@ -90,7 +90,7 @@ export default async function CheckoutSuccessPage({
                                 href="/"
                                 className="px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md transition-colors"
                             >
-                                {t("CheckoutSuccessPage.continueShopping")}
+                                {t("SuccessPage.continueShopping")}
                             </Link>
                         </div>
                     </>
